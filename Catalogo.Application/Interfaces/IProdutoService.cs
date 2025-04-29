@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Application.Interfaces
 {
-    interface IProdutoService
+  public  interface IProdutoService
     {
         Task<IEnumerable<ProdutosDTO>> GetProdutos();
         Task<ProdutosDTO> GetById(int id);

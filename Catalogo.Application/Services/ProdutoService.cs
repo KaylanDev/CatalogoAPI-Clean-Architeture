@@ -13,19 +13,19 @@ using System.Runtime.CompilerServices;
 
 namespace Catalogo.Application.Services
 {
-    class ProdutosService : IProdutoService
+  public class ProdutoService : IProdutoService
     {
         private IProdutoRepository _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutosService(IProdutoRepository produtoService, IMapper mapper)
+        public ProdutoService(IProdutoRepository produtoService, IMapper mapper)
         {
             _produtoService = produtoService;
             _mapper = mapper;
         }
         public async Task<IEnumerable<ProdutosDTO>> GetProdutos()
         {
-           var produtosEntities = await _produtoService.GetProdutosAsync();
+           var produtosEntities = await _produtoService.GetAsync();
             return _mapper.Map<IEnumerable<ProdutosDTO>>(produtosEntities);
         }
         public async Task<ProdutosDTO> GetById(int id)

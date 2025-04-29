@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Application.DTOs
 {
-    class CategoriaDTO
+   public class CategoriaDTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "name is required!")]
         [MinLength(3)]
         [MaxLength(100)]
-        public string Nome { get; private set; }
+        public string Nome { get;  set; }
         [Required(ErrorMessage = "Image is required!")]
         [MinLength(3)]
         [MaxLength(500)]
-        public string ImagemUrl { get; private set; }
+        public string ImagemUrl { get;  set; }
 
     }
 }

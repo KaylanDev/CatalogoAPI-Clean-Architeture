@@ -9,7 +9,7 @@ using Catalogo.Domain.Entities;
 
 namespace Catalogo.Application.Mappings
 {
-    class DomainToMappinProfile : Profile
+  public  class DomainToMappinProfile : Profile
     {
         public DomainToMappinProfile()
         {

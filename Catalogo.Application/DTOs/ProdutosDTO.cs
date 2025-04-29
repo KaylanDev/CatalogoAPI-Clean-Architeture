@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Application.DTOs
 {
-    class ProdutosDTO
+  public  class ProdutosDTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "O nome é obrigatorio!")]

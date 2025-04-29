@@ -10,7 +10,7 @@ using AutoMapper;
 using Catalogo.Domain.Entities;
 namespace Catalogo.Application.Services
 {
-    class CategoriaService : ICategoriaService
+   public class CategoriaService : ICategoriaService
     {
         private ICategoriaRepository _categoriaRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace Catalogo.Application.Services
 
         public async Task<IEnumerable<CategoriaDTO>> GetCategorias()
         {
-            var categoriaEntities = await _categoriaRepository.GetCategoriasAsync();
+            var categoriaEntities = await _categoriaRepository.GetAsync();
             return _mapper.Map<IEnumerable<CategoriaDTO>>(categoriaEntities);
         }
 
@@ -35,10 +35,12 @@ namespace Catalogo.Application.Services
             return _mapper.Map<CategoriaDTO>(categoriaentitie);
         }
 
-        public async Task Add(CategoriaDTO categoriaDTO)
+        public async Task<CategoriaDTO> Add(CategoriaDTO categoriaDTO)
         {
+
             var categoriaCreat = _mapper.Map<Categoria>(categoriaDTO);
            await _categoriaRepository.CreateAsync(categoriaCreat);
+            return _mapper.Map<CategoriaDTO>(categoriaCreat);
             
         }
 
@@ -46,8 +48,12 @@ namespace Catalogo.Application.Services
 
         public async Task Remove(int? id)
         {
-            var categoriaRemove = _mapper.Map<Categoria>(_categoriaRepository.GetByIdAsync(id));
-            await _categoriaRepository.RemoveAsync(categoriaRemove);
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            var categoria = await _categoriaRepository.GetByIdAsync(id); // Aguarde a operação
+            if (categoria == null) throw new KeyNotFoundException("Categoria não encontrada.");
+
+            await _categoriaRepository.RemoveAsync(categoria); // Aguarde a operação
         }
 
         public async Task Update(CategoriaDTO categoriaDTO)

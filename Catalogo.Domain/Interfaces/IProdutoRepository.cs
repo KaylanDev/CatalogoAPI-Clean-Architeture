@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Domain.Interfaces
 {
-   public interface IProdutoRepository
+   public interface IProdutoRepository : IRepository<Produto>
     {
-        Task<IEnumerable<Produto>> GetProdutosAsync();
-        Task<Categoria> GetByIdAsync(int? id);
-        Task<Categoria> CreateAsync(Produto produto);
-        Task<Categoria> UpdateAsync(Produto produto);
-        Task<Categoria> RemoveAsync(Produto produto);
+   
     }
 }

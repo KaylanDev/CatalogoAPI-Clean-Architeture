@@ -10,7 +10,7 @@ namespace Catalogo.Domain.Entities
     {
         public string Nome { get;private set; }
         public string ImagemUrl { get;private set; }
-        ICollection<Produto> Produtos { get; set; }
+       public ICollection<Produto> Produtos { get; set; }
 
         public Categoria(int id,string nome, string imagemUrl)
         {

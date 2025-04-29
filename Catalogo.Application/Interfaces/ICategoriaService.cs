@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Application.Interfaces
 {
-    interface ICategoriaService
+  public  interface ICategoriaService
     {
         Task<IEnumerable<CategoriaDTO>> GetCategorias();
         Task<CategoriaDTO> GetById(int id);
-        Task Add(CategoriaDTO categoriaDTO);
+        Task<CategoriaDTO> Add(CategoriaDTO categoriaDTO);
         Task Update(CategoriaDTO categoriaDTO);
         Task Remove(int? id);
 
