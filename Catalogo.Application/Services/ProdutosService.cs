@@ -8,44 +8,52 @@ using System.Threading.Tasks;
 using Catalogo.Domain.Entities;
 using Catalogo.Domain.Interfaces;
 using AutoMapper;
+using System.Runtime.CompilerServices;
+
 
 namespace Catalogo.Application.Services
 {
     class ProdutosService : IProdutoService
     {
-        private IProdutoService _produtoService;
+        private IProdutoRepository _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutosService(IProdutoService produtoService, IMapper mapper)
+        public ProdutosService(IProdutoRepository produtoService, IMapper mapper)
         {
             _produtoService = produtoService;
             _mapper = mapper;
         }
-        public Task<IEnumerable<ProdutosDTO>> GetProdutos()
+        public async Task<IEnumerable<ProdutosDTO>> GetProdutos()
         {
-           
+           var produtosEntities = await _produtoService.GetProdutosAsync();
+            return _mapper.Map<IEnumerable<ProdutosDTO>>(produtosEntities);
         }
-        public Task<ProdutosDTO> GetById(int id)
+        public async Task<ProdutosDTO> GetById(int id)
         {
-           
-        }
-
-
-        public Task Add(ProdutosDTO produtosDto)
-        {
-           
+           var produtosEntities = await _produtoService.GetByIdAsync(id);
+            return _mapper.Map<ProdutosDTO>(produtosEntities);
         }
 
 
-
-        public Task Remove(int? id)
+        public async Task Add(ProdutosDTO produtosDto)
         {
-           
+           var produtosCreate = _mapper.Map<Produto>(produtosDto);
+            await _produtoService.CreateAsync(produtosCreate);
+          
         }
 
-        public Task Update(ProdutosDTO produtosDto)
+
+
+        public async Task Remove(int? id)
         {
-           
+           var produtosRemove = _mapper.Map<Produto>(_produtoService.GetByIdAsync(id));
+            await _produtoService.RemoveAsync(produtosRemove);
+        }
+
+        public async Task Update(ProdutosDTO produtosDto)
+        {
+            var produtosUpdate = _mapper.Map<Produto>(produtosDto);
+              await _produtoService.UpdateAsync(produtosUpdate);
         }
     }
 }
