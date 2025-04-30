@@ -1,5 +1,5 @@
-<h1 align="center">CatalogoAPI</h1>
-neste repositorio esta um modelo de clean architecture API WEB, abaixo estara a explicação de cada projeto e suas funções.
+# :books: CatalogoAPI 
+Neste repositorio esta um modelo de clean architecture API WEB, abaixo estara a explicação de cada projeto e suas funções.
 * [Domain](#Domain)
 * [Application](#Application)
 * [Infrastruture](#Infrastruture)
